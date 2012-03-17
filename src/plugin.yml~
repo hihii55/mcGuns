@@ -1,0 +1,9 @@
+{
+  "description": "The gun plugin for Bukkit.", 
+  "main": "org.hihii55.mcGuns.McGuns", 
+  "name": "mcGuns", 
+  "version": "0.1", 
+  "authors": [
+    "hihii55"
+  ]
+}
