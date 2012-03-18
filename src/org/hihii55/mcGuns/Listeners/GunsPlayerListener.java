@@ -7,6 +7,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.Material;
+import org.hihii55.mcGuns.GunsActionLib;
 
 public class GunsPlayerListener implements Listener {
 
@@ -17,8 +18,7 @@ public class GunsPlayerListener implements Listener {
 		//First the pistol:
 		switch (action){
 			case LEFT_CLICK_AIR: 
-				if(holdedItem.getType() == Material.IRON_INGOT)
-					p.shootArrow();
+				GunsActionLib.pistolShotment(p, holdedItem);
 				default:
 				
 		}
