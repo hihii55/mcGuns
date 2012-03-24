@@ -1,21 +1,29 @@
 package org.hihii55.mcGuns;
 
+import java.util.HashMap;
+
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import org.hihii55.mcGuns.ExternalFiles.AbstractExternal;
+import org.hihii55.mcGuns.ExternalFiles.GunsAnnouncements;
 import org.hihii55.mcGuns.Listeners.GunsPlayerListener;
 
 public class McGuns extends JavaPlugin {
+	static final HashMap hashy = new HashMap();
 	final PluginDescriptionFile pdf = this.getDescription();
-	private final PluginManager pm = getServer().getPluginManager();
-	private final GunsPlayerListener plLis = new GunsPlayerListener();
+	final PluginManager pm = getServer().getPluginManager();
+	final GunsPlayerListener plLis = new GunsPlayerListener();
+	public final AbstractExternal annou = new GunsAnnouncements(this);
 
 	@Override
 	public void onEnable() {
 		System.out.println("[mcGuns] Enabled, version "+pdf.getDescription()+" by: "+pdf.getAuthors());
 		System.out.println("[mcGuns] Loading files...");
-		this.register();	
+		
+		this.register();
 	}
 	
 	private void register() {
