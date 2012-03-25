@@ -12,7 +12,7 @@ import org.hihii55.mcGuns.ExternalFiles.GunsAnnouncements;
 import org.hihii55.mcGuns.Listeners.GunsPlayerListener;
 
 public class McGuns extends JavaPlugin {
-	static final HashMap hashy = new HashMap();
+	public static final HashMap hashy = new HashMap();
 	final PluginDescriptionFile pdf = this.getDescription();
 	final PluginManager pm = getServer().getPluginManager();
 	final GunsPlayerListener plLis = new GunsPlayerListener();

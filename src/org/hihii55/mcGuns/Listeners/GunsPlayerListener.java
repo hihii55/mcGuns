@@ -6,6 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.hihii55.mcGuns.GunsActionLib;
+import org.hihii55.mcGuns.Guns.Gun;
 
 public class GunsPlayerListener implements Listener {
 
@@ -21,6 +22,9 @@ public class GunsPlayerListener implements Listener {
 				GunsActionLib.shotmentPreprocessor(p);
 				break;
 			case LEFT_CLICK_AIR:
+				
+				Gun gun = McGuns.hashy.get(p.getItemInHand());
+				if()
 					
 				
 		}

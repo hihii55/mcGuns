@@ -3,7 +3,7 @@ package org.hihii55.mcGuns.Guns;
 public class Pistol extends Gun {
 
 	@Override
-	public void setAmmo(int arg) {
+	public void setMag(int arg) {
 
 	}
 
@@ -14,7 +14,7 @@ public class Pistol extends Gun {
 	}
 
 	@Override
-	public int getAmmo() {
+	public int getMag() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
