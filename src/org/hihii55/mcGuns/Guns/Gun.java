@@ -11,12 +11,14 @@ public abstract class Gun {
 	protected boolean pulled;
 	protected int pulledTimes;
 	protected GunTypes type;
+	protected int mag;
+	protected Player owner;
 	
-	public abstract void setMag(int arg);
 	
 	public Gun(ItemStack arg2, Player owner, GunTypes arg3){
 		this.item = arg2;
 		this.type = arg3;
+		this.owner = owner;
 		McGuns.hashy.put(item, this);
 		String prestring = ChatColor.AQUA+"Crafted "+ChatColor.DARK_GREEN;
 		switch(type){
@@ -39,7 +41,8 @@ public abstract class Gun {
 	
 	public abstract void shoot();
 	
-	public abstract int getMag();
+	public int getMag(){return mag;}
+	public void setMag(int arg){ this.mag = arg;}
 	
 	public void destroy() {
 		System.gc();

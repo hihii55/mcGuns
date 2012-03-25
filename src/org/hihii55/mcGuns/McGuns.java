@@ -9,10 +9,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import org.hihii55.mcGuns.ExternalFiles.AbstractExternal;
 import org.hihii55.mcGuns.ExternalFiles.GunsAnnouncements;
+import org.hihii55.mcGuns.Guns.Gun;
 import org.hihii55.mcGuns.Listeners.GunsPlayerListener;
+import org.hihii55.mcGuns.ammo.AmmoTypes;
 
 public class McGuns extends JavaPlugin {
-	public static final HashMap hashy = new HashMap();
+	public static final HashMap <ItemStack, Gun> hashy = new HashMap<ItemStack, Gun>();
+	public static final HashMap <ItemStack, AmmoTypes> hashyammo = new HashMap<ItemStack, AmmoTypes>();
 	final PluginDescriptionFile pdf = this.getDescription();
 	final PluginManager pm = getServer().getPluginManager();
 	final GunsPlayerListener plLis = new GunsPlayerListener();
