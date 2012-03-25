@@ -11,9 +11,9 @@ public abstract class Gun {
 	protected boolean pulled;
 	protected int pulledTimes;
 	protected GunTypes type;
-	protected int mag;
 	protected Player owner;
 	
+	public abstract void load();
 	
 	public Gun(ItemStack arg2, Player owner, GunTypes arg3){
 		this.item = arg2;
