@@ -6,13 +6,15 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.hihii55.mcGuns.GunsActionLib;
-import org.hihii55.mcGuns.McGuns;
-import org.hihii55.mcGuns.ammo.AmmoTypes;
 
 public class Pistol extends Gun {
+	
+	public int hittedtimes = 0;
+	public long firstTime = 0;
+	public long lastTime = 0;
+	
 
 	private int mag;
 	public static int maxMag;
@@ -21,10 +23,6 @@ public class Pistol extends Gun {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public void setMag(int arg) {
-
-	}
 
 	@Override
 	public void shoot() {
@@ -32,7 +30,7 @@ public class Pistol extends Gun {
 		if(mag >= 0){
 			mag--;
 			GunsActionLib.physic();
-			owner.getWorld().playEffect(owner.getLocation(), Effect.ZOMBIE_CHEW_WOODEN_DOOR, 1, 10);
+			owner.getWorld().playEffect(owner.getLocation(), Effect.ZOMBIE_CHEW_IRON_DOOR, 1, 10);
 			owner.sendMessage("                                                "+ChatColor.DARK_RED+"===POW!===");
 			List<Player> swp = owner.getWorld().getPlayers();
 			while(x >= swp.size()) {
@@ -44,35 +42,10 @@ public class Pistol extends Gun {
 			}x=0;}
 		
 		else{
-			owner.getWorld().playEffect(owner.getLocation(), Effect.CLICK2, 1, 10);}
+			owner.getWorld().playEffect(owner.getLocation(), Effect.CLICK2, 1, 5);}
 			
 		}
-		
-	
 
-	@Override
-	public int getMag() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void load() {
-		int y = 0;
-		Inventory inv = owner.getInventory();
-		ItemStack con[] = inv.getContents();
-		while(y >= 36 || mag >=maxMag){
-			if(McGuns.hashyammo.get(con[y]) == AmmoTypes.LIGHT);{
-				if(inv.contains(con[y])){
-					inv.remove(con[y]);
-					mag++;
-					}	
-				}
-		
-		y++;}
-		y = 0;
-		
-	}
 		
 }
 

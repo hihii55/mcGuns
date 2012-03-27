@@ -6,8 +6,9 @@ public enum AmmoTypes {
 	LIGHT(2),
 	MEDIUM(3),
 	HEAVY(4),
+	SHOTGUN_AMMO(5),
 	
-	SMALL_MISSILE(5);
+	SMALL_MISSILE(6);
 	
 	int desc;
 	

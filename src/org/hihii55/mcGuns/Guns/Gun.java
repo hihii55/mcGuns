@@ -2,18 +2,23 @@ package org.hihii55.mcGuns.Guns;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.hihii55.mcGuns.McGuns;
+import org.hihii55.mcGuns.ammo.AmmoTypes;
 
 public abstract class Gun {
 	
 	protected ItemStack item;
-	protected boolean pulled;
-	protected int pulledTimes;
 	protected GunTypes type;
 	protected Player owner;
+	public int hittedtimes = 0;
+	public long firstTime = 0;
+	public long lastTime = 0;
+	protected int mag;
+	public static int maxMag;
+	protected AmmoTypes neededAmmo;
 	
-	public abstract void load();
 	
 	public Gun(ItemStack arg2, Player owner, GunTypes arg3){
 		this.item = arg2;
@@ -35,9 +40,29 @@ public abstract class Gun {
 			owner.sendMessage(prestring+"M4"+ChatColor.AQUA+"-assault rifle.");
 			break;}
 		
+		if(type == GunTypes.Desert_Eagle
+		  || type == GunTypes.G_18
+		  || type == GunTypes.M1911
+		  || type == GunTypes.MP_5
+		  || type == GunTypes.UZI
+		  || type == GunTypes.UMP_45)
+			{neededAmmo = AmmoTypes.LIGHT;}
+		else if(type == GunTypes.AK_47_Kalasnikov
+				|| type == GunTypes.M16
+				|| type == GunTypes.M46A1
+				|| type == GunTypes.RPK
+				|| type == GunTypes.RPD
+				|| type == GunTypes.M240)
+					{neededAmmo = AmmoTypes.MEDIUM;}
+		else if(type == GunTypes.SPAS_12
+				|| type == GunTypes.STAKEOUT
+				|| type == GunTypes.RANGER)
+			{neededAmmo = AmmoTypes.SHOTGUN_AMMO;}
+		//If it is a bazooka:
+		else{neededAmmo = AmmoTypes.SMALL_MISSILE;}
 		
 		
-	}
+		}
 	
 	public abstract void shoot();
 	
@@ -48,10 +73,29 @@ public abstract class Gun {
 		System.gc();
 	}
 	
-	public int getPulledTimes(){return this.pulledTimes;}
-	public void setPulledTimes(int arg){this.pulledTimes = arg;}
-	public boolean getPulled() {return pulled;}
-	public void setPulled(boolean arg) {this.pulled = arg;}
-	public GunTypes getType() {return this.type;}
+	
 
+
+	public void load() {
+		int y = 0;
+		Inventory inv = owner.getInventory();
+		ItemStack con[] = inv.getContents();
+		while(y >= con.length || mag >=maxMag){
+			if(McGuns.hashyammo.get(con[y]) == neededAmmo);{
+				if(inv.contains(con[y])){
+					inv.remove(con[y]);
+					mag++;
+					}
+				}
+		
+		y++;}
+		if (mag <= 0)
+			owner.sendMessage(ChatColor.DARK_AQUA+"You cannot load your gun, you are out of light ammo!");
+		if (mag < maxMag)
+			owner.sendMessage(ChatColor.DARK_AQUA+"Your cannot load your mag fully. Current mag: "+ChatColor.YELLOW+mag+"/"+maxMag);
+		y = 0;
+		
+	}
+	public GunTypes getType() {return this.type;}
+	
 }
