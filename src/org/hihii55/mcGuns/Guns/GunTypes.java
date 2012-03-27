@@ -13,7 +13,11 @@ public enum GunTypes {
 	Desert_Eagle(4),
 	G_18(5),
 	M1911(6),
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> c3e97904c5a43c9ca062922db8ca1c519e78a02b
 	//Snipers:
 	//TOOL: PAPER
 
