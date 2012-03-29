@@ -40,33 +40,33 @@ public abstract class Gun {
 			owner.sendMessage(prestring+"M4"+ChatColor.AQUA+"-assault rifle.");
 			break;}
 		
-		if(type == GunTypes.Desert_Eagle
-		  || type == GunTypes.G_18
-		  || type == GunTypes.M1911
-		  || type == GunTypes.MP_5
-		  || type == GunTypes.UZI
-		  || type == GunTypes.UMP_45)
-			{neededAmmo = AmmoTypes.LIGHT;}
-		else if(type == GunTypes.AK_47_Kalasnikov
-				|| type == GunTypes.M16
-				|| type == GunTypes.M46A1
-				|| type == GunTypes.RPK
-				|| type == GunTypes.RPD
-				|| type == GunTypes.M240)
+		if(this.type == GunTypes.Desert_Eagle
+		  || this.type == GunTypes.G_18
+		  || this.type == GunTypes.M1911
+		  || this.type == GunTypes.MP_5
+		  || this.type == GunTypes.UZI
+		  || this.type == GunTypes.UMP_45)
+			{this.neededAmmo = AmmoTypes.LIGHT;}
+		else if(this.type == GunTypes.AK_47_Kalasnikov
+				|| this.type == GunTypes.M16
+				|| this.type == GunTypes.M46A1
+				|| this.type == GunTypes.RPK
+				|| this.type == GunTypes.RPD
+				|| this.type == GunTypes.M240)
 					{neededAmmo = AmmoTypes.MEDIUM;}
-		else if(type == GunTypes.SPAS_12
-				|| type == GunTypes.STAKEOUT
-				|| type == GunTypes.RANGER)
-			{neededAmmo = AmmoTypes.SHOTGUN_AMMO;}
+		else if(this.type == GunTypes.SPAS_12
+				|| this.type == GunTypes.STAKEOUT
+				|| this.type == GunTypes.RANGER)
+			{this.neededAmmo = AmmoTypes.SHOTGUN_AMMO;}
 		//If it is a bazooka:
-		else{neededAmmo = AmmoTypes.SMALL_MISSILE;}
+		else{this.neededAmmo = AmmoTypes.SMALL_MISSILE;}
 		
 		
 		}
 	
 	public abstract void shoot();
 	
-	public int getMag(){return mag;}
+	public int getMag(){return this.mag;}
 	public void setMag(int arg){ this.mag = arg;}
 	
 	public void destroy() {
@@ -78,21 +78,21 @@ public abstract class Gun {
 
 	public void load() {
 		int y = 0;
-		Inventory inv = owner.getInventory();
+		Inventory inv = this.owner.getInventory();
 		ItemStack con[] = inv.getContents();
-		while(y >= con.length || mag >=maxMag){
-			if(McGuns.hashyammo.get(con[y]) == neededAmmo);{
+		while(y >= con.length || this.mag >=maxMag){
+			if(McGuns.hashyammo.get(con[y]) == this.neededAmmo);{
 				if(inv.contains(con[y])){
 					inv.remove(con[y]);
-					mag++;
+					this.mag++;
 					}
 				}
 		
 		y++;}
-		if (mag <= 0)
-			owner.sendMessage(ChatColor.DARK_AQUA+"You cannot load your gun, you are out of light ammo!");
-		if (mag < maxMag)
-			owner.sendMessage(ChatColor.DARK_AQUA+"Your cannot load your mag fully. Current mag: "+ChatColor.YELLOW+mag+"/"+maxMag);
+		if (this.mag <= 0)
+			this.owner.sendMessage(ChatColor.DARK_AQUA+"You cannot load your gun, you are out of light ammo!");
+		if (this.mag < maxMag)
+			this.owner.sendMessage(ChatColor.DARK_AQUA+"Your cannot load your mag fully. Current mag: "+ChatColor.YELLOW+mag+"/"+maxMag);
 		y = 0;
 		
 	}
