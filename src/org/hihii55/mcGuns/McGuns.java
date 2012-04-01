@@ -2,6 +2,7 @@ package org.hihii55.mcGuns;
 
 import java.util.HashMap;
 
+import org.bukkit.Server;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
@@ -22,10 +23,13 @@ public class McGuns extends JavaPlugin {
 	public static final HashMap <AmmoTypes, ItemStack> hashyammo2 = new HashMap<AmmoTypes, ItemStack>();
 	public static McGuns instance;
 	final PluginDescriptionFile pdf = this.getDescription();
+	public final Server s = getServer();
 	final PluginManager pm = getServer().getPluginManager();
+	private boolean on;
 
 	@Override
 	public void onEnable() {
+		setOn(true);
 		System.out.println("[mcGuns] Enabled, version "+pdf.getDescription()+" by: "+pdf.getAuthors());
 		System.out.println("[mcGuns] Loading files...");
 		BukkitScheduler scheduler = getServer().getScheduler();
@@ -41,7 +45,16 @@ public class McGuns extends JavaPlugin {
 	
 	@Override
 	public void onDisable() {
+		setOn(false);
 		System.out.println("[mcGuns] Disabled. Version "+pdf.getDescription()+" by: "+pdf.getAuthors());
+	}
+
+	public boolean isOn() {
+		return on;
+	}
+
+	public void setOn(boolean on) {
+		this.on = on;
 	}
 	
 	

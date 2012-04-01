@@ -4,8 +4,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
 import org.hihii55.mcGuns.McGuns;
+import org.hihii55.mcGuns.Guns.Pistol;
 
 public class GunsCommandListener implements CommandExecutor {
 	
@@ -27,8 +30,20 @@ public class GunsCommandListener implements CommandExecutor {
 			
 			else if(arg1.getName().equalsIgnoreCase("mcguns admin") || arg0.hasPermission("mcguns.admin.help")){
 			}//More commands coming soon...
-		return true;
-	}
+
+	
+		else if(arg1.getName().toLowerCase().startsWith("mcguns givegun")){
+			if(arg1.getName().equalsIgnoreCase("mcguns givegun deserteagle")){
+				if(arg0 instanceof Player){
+					new Pistol(new ItemStack(null, 0)) 
+					
+				}
+			}
+					
+			
+			
+			}
+		}		return true;}
 
 	public void registerCommands() {
 		McGuns.instance.getCommand("mcguns").setExecutor(new GunsCommandListener());
