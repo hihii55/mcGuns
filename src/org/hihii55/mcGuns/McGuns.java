@@ -2,6 +2,7 @@ package org.hihii55.mcGuns;
 
 import java.util.HashMap;
 
+import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -17,10 +18,8 @@ import org.hihii55.mcGuns.Listeners.GunsPlayerListener;
 import org.hihii55.mcGuns.ammo.AmmoTypes;
 
 public class McGuns extends JavaPlugin {
-	public static final HashMap <ItemStack, Gun> hashy = new HashMap<ItemStack, Gun>();
-	public static final HashMap <ItemStack, AmmoTypes> hashyammo = new HashMap<ItemStack, AmmoTypes>();
-	public static final HashMap <Gun, ItemStack> hashy2 = new HashMap<Gun, ItemStack>();
-	public static final HashMap <AmmoTypes, ItemStack> hashyammo2 = new HashMap<AmmoTypes, ItemStack>();
+	public static final HashMap hashy = new HashMap();
+	public static final HashMap <ItemStack, Material> itemDataBase = new HashMap<ItemStack, Material>();
 	public static McGuns instance;
 	final PluginDescriptionFile pdf = this.getDescription();
 	public final Server s = getServer();
@@ -33,6 +32,7 @@ public class McGuns extends JavaPlugin {
 		System.out.println("[mcGuns] Enabled, version "+pdf.getDescription()+" by: "+pdf.getAuthors());
 		System.out.println("[mcGuns] Loading files...");
 		BukkitScheduler scheduler = getServer().getScheduler();
+		scheduler.callSyncMethod(this, new GunClock());
 		
 		this.register();
 	}
