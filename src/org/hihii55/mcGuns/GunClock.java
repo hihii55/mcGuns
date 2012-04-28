@@ -24,8 +24,7 @@ public class GunClock implements Callable {
 		List<Player> players;
 		ItemStack[] stuff = null;
 		ItemStack[] stufff = null;
-		
-	while(McGuns.instance.isOn()){	
+			
 		
 		for(int checked = 0;checked >= w.size();checked++){
 			players = w.get(checked).getPlayers();
@@ -67,6 +66,6 @@ public class GunClock implements Callable {
 		
 	}
 
-}
+
 	return null;
 }}

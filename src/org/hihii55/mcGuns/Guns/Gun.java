@@ -20,11 +20,16 @@ public abstract class Gun {
 	protected AmmoTypes neededAmmo;
 	
 	
+	/**
+	 * The main constructor of a gun
+	 * @param item, the item of the gun
+	 * @param owner, owner of the gun
+	 * @param type, the guntype of the gun
+	 */
 	public Gun(ItemStack arg2, Player owner, GunTypes arg3){
 		this.item = arg2;
 		this.type = arg3;
 		this.owner = owner;
-		McGuns.hashy.put(item, this);
 		String prestring = ChatColor.AQUA+"Crafted "+ChatColor.DARK_GREEN;
 		switch(type){
 		
@@ -63,25 +68,34 @@ public abstract class Gun {
 		
 		
 		}
-	
+	/**
+	 * Shooting statement. Abstract.
+	 */
 	public abstract void shoot();
-	
+	/**
+	 * Returns the current mag
+	 * @return mag
+	 */
 	public int getMag(){return this.mag;}
+	/**
+	 * Sets the current mag
+	 * @param mag
+	 */
 	public void setMag(int arg){ this.mag = arg;}
 	
-	public void destroy() {
-		System.gc();
-	}
 	
 	
 
 
+	/**
+	 * The gun loading statement
+	 */
 	public void load() {
 		int y = 0;
 		Inventory inv = this.owner.getInventory();
 		ItemStack con[] = inv.getContents();
 		while(y >= con.length || this.mag >=maxMag){
-			if(McGuns.hashyammo.get(con[y]) == this.neededAmmo);{
+			if(McGuns.hashy.get(con[y]) == this.neededAmmo);{
 				if(inv.contains(con[y])){
 					inv.remove(con[y]);
 					this.mag++;
@@ -96,6 +110,17 @@ public abstract class Gun {
 		y = 0;
 		
 	}
+	/**
+	 * Returns the type of the gun
+	 * 
+	 * @return type of the gun
+	 */
 	public GunTypes getType() {return this.type;}
+	/**
+	 * Sets the type of the gun
+	 * 
+	 * @param type of the gun
+	 */
+	public void setType(GunTypes arg) {this.type = arg;}
 	
 }
