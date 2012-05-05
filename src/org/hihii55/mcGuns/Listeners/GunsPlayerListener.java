@@ -1,19 +1,23 @@
 	package org.hihii55.mcGuns.Listeners;
 	
 	
-	import org.bukkit.entity.Player;
+	import org.bukkit.Material;
+import org.bukkit.entity.Player;
 	import org.bukkit.event.EventHandler;
 	import org.bukkit.event.EventPriority;
 	import org.bukkit.event.Listener;
 	import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerDropItemEvent;
 	import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.ItemStack;
 	import org.hihii55.mcGuns.McGuns;
 	import org.hihii55.mcGuns.Guns.Gun;
-	import org.hihii55.mcGuns.Guns.GunTypes;
+import org.hihii55.mcGuns.Guns.GunTypes;
 	
 	public class GunsPlayerListener implements Listener {
 	
-		//The most important event:
+		//The most important event (for mcGuns):
 		@EventHandler(priority = EventPriority.HIGH)
 		public void onPlayerInteract(PlayerInteractEvent event) {
 			Player p = event.getPlayer();
@@ -60,7 +64,20 @@
 					
 						
 						}
-					
-					
-					
-			}
+		public void onPlayerJoin(PlayerJoinEvent event)
+		{
+		if(event.getPlayer().hasPermission("mcguns.use.holding")) {
+		GunsPlayerInventoryWatcher watcher = new GunsPlayerInventoryWatcher(event.getPlayer());
+		McGuns.playerWatches.put(event.getPlayer(), watcher);
+		watcher.start();}	
+		}
+		public void onPlayerDropItem(PlayerDropItemEvent event) {
+			GunsPlayerInventoryWatcher watch = McGuns.playerWatches.get(event.getPlayer());
+			if(event.getItemDrop().getItemStack() == watch.lastItemAsHelmet){
+			event.getItemDrop().remove();
+			ItemStack item = new ItemStack(Material.LEAVES, 1);
+			event.getPlayer().getInventory().setHelmet(item);
+			watch.lastItemAsHelmet = item;}
+		}
+		
+	}

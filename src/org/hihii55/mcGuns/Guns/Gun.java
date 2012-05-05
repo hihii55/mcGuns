@@ -17,7 +17,7 @@ public abstract class Gun {
 	public long lastTime = 0;
 	protected int mag;
 	public static int maxMag;
-	protected AmmoTypes neededAmmo;
+	public static AmmoTypes neededAmmo;
 	
 	
 	/**
@@ -30,20 +30,9 @@ public abstract class Gun {
 		this.item = arg2;
 		this.type = arg3;
 		this.owner = owner;
-		String prestring = ChatColor.AQUA+"Crafted "+ChatColor.DARK_GREEN;
-		switch(type){
+		String prestring = ChatColor.AQUA+"Maked "+ChatColor.DARK_GREEN;
+			owner.sendMessage(prestring+" "+type.description);
 		
-		case AK_47_Kalasnikov:
-			owner.sendMessage(prestring+"AK-47 Kalasnikov"+ChatColor.AQUA+"-assault rifle.");
-			break;
-		
-		case M16:
-			owner.sendMessage(prestring+"M16"+ChatColor.AQUA+"-assault rifle.");
-			break;
-		
-		case M46A1:
-			owner.sendMessage(prestring+"M4"+ChatColor.AQUA+"-assault rifle.");
-			break;}
 		
 		if(this.type == GunTypes.Desert_Eagle
 		  || this.type == GunTypes.G_18
@@ -51,7 +40,7 @@ public abstract class Gun {
 		  || this.type == GunTypes.MP_5
 		  || this.type == GunTypes.UZI
 		  || this.type == GunTypes.UMP_45)
-			{this.neededAmmo = AmmoTypes.LIGHT;}
+			{this.neededAmmo = AmmoTypes.VERY_LIGHT;}
 		else if(this.type == GunTypes.AK_47_Kalasnikov
 				|| this.type == GunTypes.M16
 				|| this.type == GunTypes.M46A1
@@ -63,6 +52,10 @@ public abstract class Gun {
 				|| this.type == GunTypes.STAKEOUT
 				|| this.type == GunTypes.RANGER)
 			{this.neededAmmo = AmmoTypes.SHOTGUN_AMMO;}
+		else if(this.type == GunTypes.Barrett_M82
+				|| this.type == GunTypes.Dragunov
+				|| this.type == GunTypes.Intervention)
+			{this.neededAmmo = AmmoTypes.HEAVY;}
 		//If it is a bazooka:
 		else{this.neededAmmo = AmmoTypes.SMALL_MISSILE;}
 		

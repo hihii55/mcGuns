@@ -5,15 +5,20 @@ import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 import org.hihii55.mcGuns.GunsActionLib;
+import org.hihii55.mcGuns.projectile.Bullet;
 
 public class Pistol extends Gun {
 	
 	public int hittedtimes = 0;
 	public long firstTime = 0;
 	public long lastTime = 0;
+	public long lastShootedTime = 0;
+	public long firstShootedTime = 0;
 	
 
 	private int mag;
@@ -26,20 +31,23 @@ public class Pistol extends Gun {
 
 	@Override
 	public void shoot() {
-		int x = 0;
-		if(mag >= 0){
+		if(mag >= 0 && !(owner.hasPermission("mcguns.admin.infiniteammo")) && owner.hasPermission("mcguns.use.shoot.pistol."+this.type.description.toLowerCase().replace(" ", ""))){
+			//Of course the pistol needs time to cool. The default value is 700 ms.(0.7 seconds)
+			firstShootedTime = System.currentTimeMillis();
+			if (lastShootedTime - firstShootedTime >= 700 || lastShootedTime == 0){
 			mag--;
-			GunsActionLib.physic();
+			owner.getWorld().playEffect(owner.getLocation(), Effect.ZOMBIE_CHEW_IRON_DOOR, 1, 15);
+			Bullet bullet = new Bullet(owner.getLocation(), 400000, 1, owner);
+			owner.getLocation().setPitch(owner.getLocation().getPitch() + 0.5f);
+			owner.getWorld().playEffect(owner.getLocation(), Effect.POTION_BREAK, 1, 10);
+			lastShootedTime = System.currentTimeMillis();}
+		else if(owner.hasPermission("mcguns.admin.infiniteammo") || owner.getGameMode() == GameMode.CREATIVE){
+			firstShootedTime = System.currentTimeMillis();
+			if (lastShootedTime - firstShootedTime >= 700 || lastShootedTime == 0){
 			owner.getWorld().playEffect(owner.getLocation(), Effect.ZOMBIE_CHEW_IRON_DOOR, 1, 10);
-			owner.sendMessage("                                                "+ChatColor.DARK_RED+"===POW!===");
-			List<Player> swp = owner.getWorld().getPlayers();
-			while(x >= swp.size()) {
-			if (swp.get(x).getLocation().getBlockX() <= owner.getLocation().getBlockX() + 10 || swp.get(x).getLocation().getBlockX() >= owner.getLocation().getBlockX() &&
-				swp.get(x).getLocation().getBlockY() <= owner.getLocation().getBlockY() + 10 || swp.get(x).getLocation().getBlockY() >= owner.getLocation().getBlockY() &&
-				swp.get(x).getLocation().getBlockZ() <= owner.getLocation().getBlockZ() + 10 || swp.get(x).getLocation().getBlockZ() >= owner.getLocation().getBlockZ())
-			swp.get(x).sendMessage("                                                "+ChatColor.DARK_RED+"===POW!==="); 
-			x++;
-			}x=0;}
+			GunsActionLib.physic();
+			lastShootedTime = System.currentTimeMillis();}
+		}
 		
 		else{
 			owner.getWorld().playEffect(owner.getLocation(), Effect.CLICK2, 1, 5);}
@@ -47,5 +55,6 @@ public class Pistol extends Gun {
 		}
 
 		
+	}
 }
 
