@@ -1,0 +1,70 @@
+name: mcGuns
+main: org.hihii55.mcGuns.McGuns
+version: Alpha 0.1-dev
+authors: [hihii55]
+description: mcGuns gives you to use modern weapons, like guns, grenades, molotov cocktails, etc. They do not look like guns. Their name plate is the original, but they still are guns. They have different properties. Even sniper is in development.
+commands:
+    mcguns:
+        description: The main help page of mcGuns
+    guns:
+        description: The main help page of mcGuns
+    gun:
+        description: The main help page of mcGuns
+permissions:
+    mcguns.*:
+        description: Gives ALL mcGuns permissions
+        children:
+            mcguns.help: true
+            mcguns.use.*: true
+            mcguns.admin.*: op
+            mcguns.info: true
+            mcguns.owner: false
+    mcguns.help:
+        description: Gives access to use the main/help command
+    mcguns.use.*:
+        description: Gives access to do default-player things.
+        children:
+            mcguns.use.craft.*: true
+            mcguns.use.shoot.*: true
+            mcguns.use.holding.*: true
+    mcguns.admin.*:
+        description: Gives access to use admin commands/things
+        children:
+            mcguns.admin.adminhelp: op
+            mcguns.admin.inifiteammo: op
+            mcguns.admin.seize: op
+            mcguns.admin.givegun.*: op
+            mcguns.admin.giveammo.*: op
+    mcguns.use.craft.*:
+        description: Gives access to player to craft guns
+            children:
+            mcguns.use.craft.pistol.*: true
+            mcguns.use.craft.assaultrifle.*: true
+            mcguns.use.craft.shotgun.*: true
+            mcguns.use.craft.sniper.*: true
+    mcguns.use.shoot.*:
+        description: Gives access to shoot/throw
+            children:
+            mcguns.use.shoot.pistol.*: true
+            mcguns.use.shoot.assaultrifle.*: true
+            mcguns.use.shoot.shotgun.*: true
+            mcguns.use.shoot.sniper.*: true
+    mcguns.admin.givegun.*:
+        description: Gives access to make guns from nothing, like /give
+        children:
+            mcguns.admin.givegun.pistol.*: op
+            mcguns.admin.givegun.assaultrifle.*: op
+            mcguns.admin.givegun.shotgun.*: op
+            mcguns.admin.givegun.sniper.*: op
+    mcguns.admin.adminhelp:
+        description: Gives access to use /mcguns admin-command
+    mcguns.use.shoot.pistol.*:
+        children:
+            mcguns.use.shoot.pistol.deserteagle
+            mcguns.use.shoot.pistol.m1911
+            mcguns.use.shoot.pistol.g18
+    mcguns.admin.givegun.pistol.*:
+        children:
+            mcguns.admin.givegun.pistol.deserteagle
+            mcguns.admin.givegun.pistol.m1911
+            mcguns.admin.givegun.pistol.g18
